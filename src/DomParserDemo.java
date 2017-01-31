@@ -971,6 +971,9 @@ public class DomParserDemo
 					} // End of iterating through each of the instructions
 					break;
 				}
+				default:{
+					System.out.println("This is the default");
+				}
 						
 			} // End of switch cases
 			
