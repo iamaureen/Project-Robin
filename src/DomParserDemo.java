@@ -740,21 +740,14 @@ public class DomParserDemo
 							}							
 							if (i == 1) // First non-trial instruction
 							{
-//								if (moveTankDistanceRotationsOnlyRightWheelMoving(eToCheck) == true)
-//								{
-//									firstBlockCorrectSpeeds = true;
-//								}
-//								
-//								firstBlockCorrectRotations = moveTankDistanceRotationsRange90Turn(eToCheck);
-//								
-//								
-//								System.out.println("Turn 90 degrees moving right wheel only");
-//								System.out.println("Correct wheels moving: " + firstBlockCorrectSpeeds);
-//								System.out.println("Correct rotations (On a scale from 0-3): " + firstBlockCorrectRotations);
-//								System.out.println();
-								
-								//check for 80 cm forward
 								System.out.println("Checking whether it is going forward 80cm............");
+								//check the value of power left and power right 
+								if (moveTankDistanceRotationsMovingForward(eToCheck) == false) {
+									
+									System.out.println("Check the power left and power right values..maybe increase them a little bit");
+								}
+								
+								//check for rotation range							
 								int returnValue = moveTankDistanceRotationsRange80cm(eToCheck);
 								
 								if(returnValue==3)System.out.println("perfect, you got it right");
@@ -762,7 +755,7 @@ public class DomParserDemo
 								else if(returnValue == 1)System.out.println("check on the rotation value, its only half way!");
 								else System.out.println("Something Wrong!");
 							}
-							if (i == 2) // First non-trial instruction
+							if (i == 2) //
 							{
 								System.out.println("Checking whether arm is going downward and its rotation  number............");
 								//check whether arm is moving downwards, mediumMotorDistanceRotationsDetection returns true if arm is moving downwards, else false
@@ -775,7 +768,7 @@ public class DomParserDemo
 								int returnValue = mediumMotorDistanceRotationsRotationsRange(eToCheck);
 								
 								if(returnValue==3)System.out.println("perfect, you got it right");
-								else if(returnValue == 2)System.out.println("you are almost there, increase little rotation value so the arm goes up");
+								else if(returnValue == 2)System.out.println("you are almost there, increase little rotation value so the arm goes down");
 								else if(returnValue == 1)System.out.println("check on the rotation value, its only half way!");
 								else System.out.println("Something Wrong!");
 							}
@@ -800,6 +793,11 @@ public class DomParserDemo
 							if (i == 4){
 								
 								System.out.println("Checking whether it is going backward 80 cm............");
+								//check the value of power left and power right 
+								if (moveTankDistanceRotationsMovingForward(eToCheck) == false) {
+									
+									System.out.println("Check the power left and power right values..maybe increase them a little bit");
+								}
 								//check 80 cm backwards
 								int returnValue = moveTankDistanceRotationsRange80cm(eToCheck);
 								
