@@ -3,5 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="E:/java jar files/mysql-connector-java-5.1.39-bin.jar"/>
+	<classpathentry kind="lib" path="E:/java jar files/jar_files/jersey-client-1.19.1.jar"/>
+	<classpathentry kind="lib" path="E:/java jar files/jar_files/jersey-core-1.19.1.jar"/>
+	<classpathentry kind="lib" path="E:/java jar files/jar_files/jsr311-api-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

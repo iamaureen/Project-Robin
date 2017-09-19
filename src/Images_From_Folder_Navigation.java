@@ -262,7 +262,7 @@ public class Images_From_Folder_Navigation extends javax.swing.JFrame {
             	  unzipper.unzip(zipFilePath, destDirectory);
                   //DomParserDemo domParser = new DomParserDemo();
                   String inputFile = pathname+"\\Program.ev3p";
-                  DomParserDemo.parse(inputFile, getPos()); // Parse the file according to Module 1 production rules
+                  DomParserDemo.parse(inputFile, getPos()+1); // Parse the file according to Module 1 production rules
                   
               } 
               catch (Exception ex) 

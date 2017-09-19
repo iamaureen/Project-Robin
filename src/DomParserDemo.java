@@ -18,7 +18,7 @@ public class DomParserDemo
 		for (int i = 1; i < numWires + 1; i++) // Iterate through each of the instructions, not including the StartBlock
 		{			
 			String IdValue = stringHolder[0][i]; // Get the Id of the current instruction
-			System.out.println("IdValue :: "+IdValue);
+			//System.out.println("IdValue :: "+IdValue);
 									
 			Element eToCheck = null; // Element object which will be initialized to the CMC of the current instruction
 						
@@ -214,7 +214,7 @@ public class DomParserDemo
 				{
 					speedLeftEqualsZero = true;
 				}
-				System.out.println("speedLeftEqualsZero::"+speedLeftEqualsZero+" configuredValue:: "+configuredValue);
+				//System.out.println("speedLeftEqualsZero::"+speedLeftEqualsZero+" configuredValue:: "+configuredValue);
 			}
 			
 			if (terminalElement.getAttribute("Id").compareTo("Speed\\ Right") == 0)
@@ -224,7 +224,7 @@ public class DomParserDemo
 				{
 					speedRightPos = true;
 				}
-				System.out.println("speedRightPos::"+speedRightPos+" configuredValue:: "+configuredValue);
+				//System.out.println("speedRightPos::"+speedRightPos+" configuredValue:: "+configuredValue);
 			}
 		}
 		
@@ -339,7 +339,7 @@ public class DomParserDemo
 			if (terminalElement.getAttribute("Id").compareTo("Rotations") == 0)
 			{
 				configuredValue = Double.parseDouble(configuredValueString);
-				System.out.println("Rotation Value:: "+configuredValue);
+				//System.out.println("Rotation Value:: "+configuredValue);
 				break;
 			}
 		}
@@ -409,7 +409,7 @@ public class DomParserDemo
 	public static void parse(String filePath, int inputModuleNumber) // Parses input file according to the module production rules
 	{
 		int moduleNum = inputModuleNumber; // Read in the module number
-		System.out.println("Module Number::"+inputModuleNumber);
+		//System.out.println("Module Number::"+inputModuleNumber);
 		try 
 		{	
 			
@@ -418,9 +418,9 @@ public class DomParserDemo
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder(); // Initialize new DocumentBuilder object using DocumentBuilderFactory object         
 			Document doc = dBuilder.parse(file); // Initialize new Document object using the File object         
 			doc.getDocumentElement().normalize(); // Normalize (?) the Document object         
-			System.out.println("Root element: " + doc.getDocumentElement().getNodeName()); // Get the name of the root element of the XML file        
+			//System.out.println("Root element: " + doc.getDocumentElement().getNodeName()); // Get the name of the root element of the XML file        
 			NodeList wList = doc.getElementsByTagName("Wire"); // Initialize new NodeList object of all "Wire" tags         
-			System.out.println("Number of wire tags: " + wList.getLength()); // Display number of "Wire" tags				
+			//System.out.println("Number of wire tags: " + wList.getLength()); // Display number of "Wire" tags				
 			int numWires = wList.getLength(); // Initialize numWires				
 			int[][] holder = new int[2][numWires]; // Initialize 2-d array where each column will hold a SequenceOut/SequenceIn pair
 				
@@ -430,14 +430,14 @@ public class DomParserDemo
 				Node wireNode = wList.item(i); // Instantiate Node object using the ith "Wire"				
 				Element wireElement = (Element) wireNode; // Instantiate Element object using the Node object above 				
 				String joints = wireElement.getAttribute("Joints"); // Store the SequenceOut/SequenceIn information in a string				
-				System.out.print("Joints:: "+joints + " "); // Print out the SequenceOut/SequenceIn string				
+				//System.out.print("Joints:: "+joints + " "); // Print out the SequenceOut/SequenceIn string				
 				// Print out the indices which immediately precede and immediately follow the SequenceOut number
-				System.out.print("Bookend indices are: " + joints.indexOf("n") + " " + joints.indexOf(":SequenceOut") + " "); 					
+				//System.out.print("Bookend indices are: " + joints.indexOf("n") + " " + joints.indexOf(":SequenceOut") + " "); 					
 				int firstNumStartIndex = joints.indexOf("n"); // Store the firstNumStartIndex				
 				int firstNumEndIndex = joints.indexOf(":SequenceOut"); // Store the firstNumEndIndex			
 				String firstNumString = joints.substring(firstNumStartIndex + 1, firstNumEndIndex); // Store the SequenceOut number 					
 				int firstNum = Integer.parseInt(firstNumString);  // Parse the SequenceOut number to an int				
-				System.out.println("So what we get is: " + firstNum); // Display the number of interest					
+				//System.out.println("So what we get is: " + firstNum); // Display the number of interest					
 				holder[0][i] = firstNum; // Since these are the "firsts" in the pairs, we store in the first row of the 2-d array
 					
 			}
@@ -448,26 +448,26 @@ public class DomParserDemo
 				Node wire = wList.item(i); // Instantiate Node object using the ith "Wire"				
 				Element wireElement = (Element) wire; // Instantiate Element object using the Node object above 				
 				String joints = wireElement.getAttribute("Joints"); // Store the SequenceOut/SequenceIn information in a string				
-				System.out.print(joints + " "); // Print out the SequenceOut/SequenceIn string				
-				System.out.print("Bookend indices are: " + joints.lastIndexOf("(n") + " " + joints.indexOf(":SequenceIn") + " "); // Print out the indices which immediately precede (by 2) and immediately follow the SequenceIn number
+				//System.out.print(joints + " "); // Print out the SequenceOut/SequenceIn string				
+				//System.out.print("Bookend indices are: " + joints.lastIndexOf("(n") + " " + joints.indexOf(":SequenceIn") + " "); // Print out the indices which immediately precede (by 2) and immediately follow the SequenceIn number
 				int secondNumStartIndex = joints.lastIndexOf("(n"); // Store the secondNumStartIndex				
 				int secondNumEndIndex = joints.indexOf(":SequenceIn"); // Store the secondNumEndIndex					
 				String secondNumString = joints.substring(secondNumStartIndex + 2, secondNumEndIndex); // Store the SequenceIn number					
 				int secondNum = Integer.parseInt(secondNumString); // Parse the SequenceIn number to an int				
-				System.out.println("So what we get is: " + secondNum); // Display the number of interest
+				//System.out.println("So what we get is: " + secondNum); // Display the number of interest
 				
 				holder[1][i] = secondNum; // Since these are the "seconds" in the pairs, we store in the second row of the 2-d array			
 			}
 				
 			// Display the filled out 2-d array
-			for (int i = 0; i < 2; i++) 
-			{
-				for (int j = 0; j < numWires; j++)
-				{
-					System.out.print(holder[i][j] + " ");
-				}				
-				System.out.println();
-			}
+//			for (int i = 0; i < 2; i++) 
+//			{
+//				for (int j = 0; j < numWires; j++)
+//				{
+//					System.out.print(holder[i][j] + " ");
+//				}				
+//				System.out.println();
+//			}
            
 			
 			
@@ -491,7 +491,7 @@ public class DomParserDemo
 				}
 			}
 				
-			System.out.println("indexOfStart: " + indexOfStart); // Display the index (column) of the starting "Wire" pair		
+			//System.out.println("indexOfStart: " + indexOfStart); // Display the index (column) of the starting "Wire" pair		
 			
 			// Swap in order to place the starting "Wire" pair in the first column
 			int[][] startHolder = new int[2][1];			
@@ -504,16 +504,16 @@ public class DomParserDemo
 			holder[0][0] = startHolder[0][0];
 			holder[1][0] = startHolder[1][0];
 			
-			System.out.println("Display the 2-d array after placing the starting Wire pair in the correct location");
-			for (int i = 0; i < 2; i++) // Display the 2-d array after placing the starting/ending "Wire" pair in the correct location
-			{
-				for (int j = 0; j < numWires; j++)
-				{
-					System.out.print(holder[i][j] + " ");
-				}
-				
-				System.out.println();
-			}
+//			System.out.println("Display the 2-d array after placing the starting Wire pair in the correct location");
+//			for (int i = 0; i < 2; i++) // Display the 2-d array after placing the starting/ending "Wire" pair in the correct location
+//			{
+//				for (int j = 0; j < numWires; j++)
+//				{
+//					System.out.print(holder[i][j] + " ");
+//				}
+//				
+//				System.out.println();
+//			}
 			
 			// Algorithm for finding the index (column) of the ending "Wire" pair
 			int indexOfEnd = 0;			
@@ -534,7 +534,7 @@ public class DomParserDemo
 					break;
 				}
 			}			
-			System.out.println("indexOfEnd: " + indexOfEnd); // Display the index (column) of the ending "Wire" pair
+			//System.out.println("indexOfEnd: " + indexOfEnd); // Display the index (column) of the ending "Wire" pair
 			
 			// Swap in order to place the ending "Wire" pair in the last column
 			
@@ -549,16 +549,16 @@ public class DomParserDemo
 			holder[0][numWires - 1] = endHolder[0][0];
 			holder[1][numWires - 1] = endHolder[1][0];
 				
-			System.out.println("Display the 2-d array after placing the ending Wire pair in the correct location");
-			for (int i = 0; i < 2; i++) // Display the 2-d array after placing the starting/ending "Wire" pair in the correct location
-			{
-				for (int j = 0; j < numWires; j++)
-				{
-					System.out.print(holder[i][j] + " ");
-				}
-				
-				System.out.println();
-			}
+//			System.out.println("Display the 2-d array after placing the ending Wire pair in the correct location");
+//			for (int i = 0; i < 2; i++) // Display the 2-d array after placing the starting/ending "Wire" pair in the correct location
+//			{
+//				for (int j = 0; j < numWires; j++)
+//				{
+//					System.out.print(holder[i][j] + " ");
+//				}
+//				
+//				System.out.println();
+//			}
 			
 			
 			for (int i = 0; i < numWires - 3; i++) // Algorithm for placing the remaining pairs in the correct location
@@ -581,16 +581,16 @@ public class DomParserDemo
 				}
 			}
 				
-			System.out.println("After sorting: "); // Display 2-d array after sorting algorithm
-			for (int i = 0; i < 2; i++)
-			{
-				for (int j = 0; j < numWires; j++)
-				{
-					System.out.print(holder[i][j] + " ");
-				}
-					
-				System.out.println();
-			}
+//			System.out.println("After sorting: "); // Display 2-d array after sorting algorithm
+//			for (int i = 0; i < 2; i++)
+//			{
+//				for (int j = 0; j < numWires; j++)
+//				{
+//					System.out.print(holder[i][j] + " ");
+//				}
+//					
+//				System.out.println();
+//			}
 				
 			String stringHolder[][] = new String[1][numWires + 1]; // Instantiate new String array which will hold the sequence of CMCs by "Id" attribute
 			
@@ -602,7 +602,7 @@ public class DomParserDemo
 			stringHolder[0][numWires] = "n" + holder[1][numWires - 1];
 			
 			// Display the sequence according to "Id" attribute
-			System.out.println("So sequence is: "); 
+			//System.out.println("So sequence is: "); 
 			
 			for (int i = 0; i < numWires + 1; i++)
 			{
@@ -614,7 +614,7 @@ public class DomParserDemo
 			// Need to add additional modules
 			switch (moduleNum) 
 			{
-				case 0: 
+				case 1: 
 				{	
 					String wrongDirectionString = "You may want to consider which direction you're going in.";
 					
@@ -693,17 +693,28 @@ public class DomParserDemo
 					if (!errorFound) {
 						
 						System.out.println("Great job! Your program was perfect!");
+						//insert to db here
 						
 					}
 					else {
 						
 						System.out.println(toReturn);
+						//connect to mysql/rest service
+						
+//						Statement stmt = conn.createStatement();                          
+//                      String sql = "INSERT INTO info VALUES ('ishrat', 1, 'That is incorrect')";
+//                      stmt.executeUpdate(sql);
+                        
+                        RobinPHPService service = new RobinPHPService();
+                        service.getResponse();
+                        
+                        //service.postResponse();
 						
 					}
 					
 					break;
 				} // End of case 0
-				case 1:
+				case 2:
 				{
 					// Start block is always correct because it is under a StartBlock tag instead of a ConfigurableMethodCallTag
 					
@@ -810,7 +821,7 @@ public class DomParserDemo
 					} // End of iterating through each of the instructions
 					break;
 				} // End Case 1
-				case 2:
+				case 3:
 				{
 					// Start block is always correct because it is under a StartBlock tag instead of a ConfigurableMethodCallTag
 					boolean firstBlockCorrect = false;
