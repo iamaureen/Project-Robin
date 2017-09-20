@@ -707,8 +707,8 @@ public class DomParserDemo
                         
                         RobinPHPService service = new RobinPHPService();
                         service.getResponse();
-                        
-                        //service.postResponse();
+                        //hardcoded, TODO: input username and pass other variables
+                        service.postResponse(1, "wasiq", "2", "Hey I knew that!");
 						
 					}
 					

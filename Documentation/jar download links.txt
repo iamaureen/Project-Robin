@@ -1,0 +1,3 @@
+https://jar-download.com/explore-java-source-code.php?a=jersey-client&g=com.sun.jersey&v=1.19.1&downloadable=1
+
+https://code.google.com/archive/p/json-simple/downloads

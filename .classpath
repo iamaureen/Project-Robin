@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="E:/java jar files/jar_files/jersey-client-1.19.1.jar"/>
 	<classpathentry kind="lib" path="E:/java jar files/jar_files/jersey-core-1.19.1.jar"/>
 	<classpathentry kind="lib" path="E:/java jar files/jar_files/jsr311-api-1.1.1.jar"/>
+	<classpathentry kind="lib" path="E:/java jar files/json-simple-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
