@@ -1,0 +1,9 @@
+1. install xampp
+2. copy the rest api in htdocs folder
+3. open xampp, start mysql and apache server
+4. open phpmyadmin in the browser to check the database insert/delete/update
+----------------------------------------------------------------------
+1. write rest api
+2. check using postman
+3. create java client for both read and create
+----------------------------------------------------------------------
