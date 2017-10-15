@@ -406,7 +406,7 @@ public class DomParserDemo
 		}
 	}
 	
-	public static void parse(String filePath, int inputModuleNumber) // Parses input file according to the module production rules
+	public static void parse(String username, String filePath, int inputModuleNumber) // Parses input file according to the module production rules
 	{
 		int moduleNum = inputModuleNumber; // Read in the module number
 		//System.out.println("Module Number::"+inputModuleNumber);
@@ -708,7 +708,7 @@ public class DomParserDemo
                         RobinPHPService service = new RobinPHPService();
                         service.getResponse();
                         //hardcoded, TODO: input username and pass other variables
-                        service.postResponse(1, "wasiq", "2", "Hey I knew that!");
+                        service.postResponse(1, username, "2", "I cannot do this");
 						
 					}
 					

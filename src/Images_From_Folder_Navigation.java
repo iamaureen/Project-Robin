@@ -3,14 +3,21 @@ import java.awt.Image;
 import java.sql.Timestamp;
 import java.util.*;
 import java.io.*;
-import java.sql.Timestamp;
 import java.util.Date;
-import java.net.URL;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class Images_From_Folder_Navigation extends javax.swing.JFrame {
+	
+	static java.util.Date date = new java.util.Date(); // Instantiate Date object
+	static String username;
     static int pos = 0; // the index of the images
     /**
      * Creates new form Images_From_Folder_Navigation
@@ -70,6 +77,7 @@ public class Images_From_Folder_Navigation extends javax.swing.JFrame {
         jButton_Last = new javax.swing.JButton();
         jButton_fileChoose = new javax.swing.JButton();
         
+        //file chooser button
         jButton_fileChoose.setText("Choose File");
         jButton_fileChoose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,10 +174,19 @@ public class Images_From_Folder_Navigation extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>  
+    private static void jButtonLogin(java.awt.event.ActionEvent evt) {   
+    	//capture username 
+    	//TODO: save it and check for future use
+    	System.out.println(userText.getText());
+    	username = userText.getText();
+    	frame.setVisible(false);
+    	
+    }
     
     
  // File choose
-    private void jButtonFileChooseActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private static void jButtonFileChooseActionPerformed(java.awt.event.ActionEvent evt) {       	
+    	
         
     	JFileChooser fileChooser = new JFileChooser();
     	fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
@@ -183,6 +200,9 @@ public class Images_From_Folder_Navigation extends javax.swing.JFrame {
     	    
     	    System.out.println("Selected file: " + selectedFile.getAbsolutePath()+ "\nfile name: " + selectedFile.getName());
     	}
+    	
+    	
+    	
         
     }  
 
@@ -226,12 +246,27 @@ public class Images_From_Folder_Navigation extends javax.swing.JFrame {
      */
     public static void main(String args[]) throws IOException {
     	
-    	java.util.Date date = new java.util.Date(); // Instantiate Date object
+    	//java.util.Date date = new java.util.Date(); // Instantiate Date object
     	
     	//file chooser, pick the ev3 file, save the file location, file name 	
     	
     	//TimerTask task1 = new FileWatcher(new File("E:\\eclipse-jee-mars-2-win32-x86_64\\workspace\\Robin\\lubold1.ev3" )) // Monitor the Module 1 file
     	
+    	
+    	
+    	//create a frame with user name and jfilechooser option
+    	frame = new JFrame("Robin application");
+		frame.setSize(300, 150);
+		frame.setLocation(700, 322);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		JPanel panel = new JPanel();
+		frame.add(panel);
+		placeComponents(panel);		
+		//check if the user exists, file read	
+		frame.setVisible(true);
+		
+		//jfilechooser option
     	JFileChooser fileChooser = new JFileChooser();
     	fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
     	int result = fileChooser.showOpenDialog(jLabel_Image);
@@ -246,11 +281,13 @@ public class Images_From_Folder_Navigation extends javax.swing.JFrame {
     	    System.out.println("Selected file: " + selectedFile.getParent()+ "\nfile name: " + selectedFile.getName());
     	}
     	
+    	
     	TimerTask task1 = new FileWatcher(new File(fullPathName)) // Monitor the Module 1 file
     			
         {
           protected void onChange(File file) // Code to be performed on file change 
           {
+        	  
         	  System.out.println("File " + file.getName() + " has changed at time " + new Timestamp(date.getTime())); 
         	  
         	  String zipFilePath = fullPathName;
@@ -262,12 +299,13 @@ public class Images_From_Folder_Navigation extends javax.swing.JFrame {
             	  unzipper.unzip(zipFilePath, destDirectory);
                   //DomParserDemo domParser = new DomParserDemo();
                   String inputFile = pathname+"\\Program.ev3p";
-                  DomParserDemo.parse(inputFile, getPos()+1); // Parse the file according to Module 1 production rules
+                  DomParserDemo.parse(username, inputFile, getPos()+1); // Parse the file according to Module 1 production rules
                   
               } 
               catch (Exception ex) 
               {
                   ex.printStackTrace();
+                  ex.getMessage();
               } 
           } // End of onChange method
         }; // End of Task 1
@@ -305,14 +343,46 @@ public class Images_From_Folder_Navigation extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    // set the structure of the init screen
+    private static void placeComponents(JPanel panel) {
 
-    // Variables declaration - do not modify                     
+	panel.setLayout(null);
+
+	JLabel userLabel = new JLabel("User");
+	userLabel.setBounds(10, 10, 80, 25);
+	panel.add(userLabel);
+
+	userText = new JTextField(20);
+	userText.setBounds(100, 10, 160, 25);
+	panel.add(userText);
+
+	
+	JButton loginButton = new JButton("login");
+	loginButton.setBounds(10, 80, 80, 25);
+	loginButton.setLocation(100, 50);
+	panel.add(loginButton);
+	
+	loginButton.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+        	jButtonLogin(evt);
+        }
+    });
+}
+
+
+    // Variables declaration - do not modify 
+    static JTextField userText;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_Last;
     private javax.swing.JButton jButton_Next;
     private javax.swing.JButton jButton_Previous;
     private javax.swing.JButton jButton_fileChoose;
     private static javax.swing.JLabel jLabel_Image;
+    JButton loginButton;
+    static JFrame frame;
+    
     
     static String pathname;
     static String filename;
